@@ -1,5 +1,5 @@
-open Common;
-// let str = ReasonReact.string;
+//open Common;
+let str = ReasonReact.string;
 
 // Example of Form handling using no state;
 // that is, use the DOM to hold the form state, instead of a using a reducer 

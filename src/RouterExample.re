@@ -49,13 +49,7 @@ let make = (_children) => {
     projectState: initialProjectState, microscopeState: initialMsState },
   reducer: (action, state) => {
     switch(action) {
-      // | ChangeRoute(route) => ReasonReact.Update({ ...state, route: route })
-      | ChangeRoute(route) => { 
-        Js.log2("state: ", state);
-        let newState =  {...state, route: route};
-        Js.log2("newState", newState);
-          ReasonReact.Update({ ...state, route: route });
-      }
+      | ChangeRoute(route) => ReasonReact.Update({ ...state, route: route })
       | UpdateProjectForm(newState) => ReasonReact.Update({ ...state, projectState: newState })
       | UpdateMsForm(newState) => ReasonReact.Update({...state, microscopeState: newState})
     };
