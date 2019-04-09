@@ -1,1 +1,2 @@
-Some example code to handle forms and simple reason - react state
+# reason-react-samples
+Just a few reason react code sample demos 
