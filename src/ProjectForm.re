@@ -40,12 +40,20 @@ let make = (~initialState: projectState, ~handleSubmit, _children )=> {
         | ProtocolIo => {...state, protocolIo: value}
         | ScientistFrom => {...state, scientistFrom: value}
         | PathologyCore => {...state, pathologyCore: value}
-        | CoPi => {...state, coPi: value}
+        | CoPi => {...state, 
+            coPi: switch(value) {
+              | "" => None
+              | _ => Some(value)
+            }}
         | ScientistConducting => {...state, scientistConducting: value}
         | Grant => {...state, grant: value}
         | Purpose => {...state, purpose: value}
         | Organism => {...state, organism: value}
-        | SampleSize => {...state, sampleSize: value}
+        | SampleSize => {...state, 
+          sampleSize: switch(value) {
+            | "" => None
+            | _ => Some(int_of_string(value))
+          }}
         | Cycles => {...state, cycles: value}
         | Comments => {...state, comments: value}
       };
@@ -91,7 +99,11 @@ let make = (~initialState: projectState, ~handleSubmit, _children )=> {
         onChange={ event=> getValue(event) |> handleChange(PathologyCore) }
       />
       <label htmlFor="coPi" >(str("Internal LSP coPI/Primary contact:"))</label>
-      <input id="coPi" value={self.state.coPi} 
+      <input id="coPi" value={
+        switch(self.state.coPi) {
+          | Some(value) => value
+          | None => ""
+        }} 
         onChange={ event=> getValue(event) |> handleChange(CoPi) }
       />
       <label htmlFor="scientistConducting" >(str("Scientist conducting CyCIF experiment:"))</label>
@@ -111,7 +123,11 @@ let make = (~initialState: projectState, ~handleSubmit, _children )=> {
         onChange={ event=> getValue(event) |> handleChange(Organism) }
       />
       <label htmlFor="sampleSize" >(str("Sample Size:"))</label>
-      <input id="sampleSize" value={self.state.sampleSize} 
+      <input id="sampleSize" value={
+        switch(self.state.sampleSize) {
+          | Some(value) => string_of_int(value)
+          | None => ""
+        }} 
         onChange={ event=> getValue(event) |> handleChange(SampleSize) }
       />
       <label htmlFor="cycles" >(str("Cycles:"))</label>

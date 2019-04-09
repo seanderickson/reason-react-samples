@@ -1,6 +1,5 @@
 open Common;
 
-
 type action = 
   | ChangeRoute(route)
   | UpdateProjectForm(projectState)
@@ -16,12 +15,12 @@ let initialProjectState: projectState = {
   protocolIo: "protocol io 1",
   scientistFrom: "Scientist From",
   pathologyCore: "Path core",
-  coPi: "Jane CoPI",
+  coPi: Some("Jane CoPI"),
   scientistConducting: "Joe Scientist",
   grant: "Grant-1",
   purpose: "Purpose-1",
   organism: "Org-1",
-  sampleSize: "4",
+  sampleSize: None,
   cycles: "4",
   comments: "Test comment here..."
 };
@@ -31,7 +30,6 @@ let initialMsState = {
   channels: "4",
   magnification: "20x"
 };
-
 
 let component = ReasonReact.reducerComponent("RouterApp");
 
@@ -63,11 +61,9 @@ let make = (_children) => {
     };
   },
   didMount: (self) => {
-  
     let watcherId = ReasonReact.Router.watchUrl(
       url=>self.send(ChangeRoute(url |> mapUrlToRoute)));
     self.onUnmount(() => ReasonReact.Router.unwatchUrl(watcherId));
-    
   },
   render: (self) => {
     <div >

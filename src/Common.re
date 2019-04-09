@@ -7,12 +7,12 @@ type projectState = {
   protocolIo: string,
   scientistFrom: string,
   pathologyCore: string,
-  coPi: string,
+  coPi: option(string),
   scientistConducting: string,
   grant: string,
   purpose: string,
   organism: string,
-  sampleSize: string,
+  sampleSize: option(int),
   cycles: string,
   comments: string
 };
